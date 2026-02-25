@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-background-dark text-slate-100 font-display;
+    }
+}
+
+.gold-gradient-text {
+    background: linear-gradient(to right, #d4af37, #f2d06b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
