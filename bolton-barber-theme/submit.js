@@ -7,7 +7,7 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbwhbRkNddJVdiLzKyKj05
  * Find all forms with data-ajax-form attribute and set up listener
  */
 document.addEventListener('DOMContentLoaded', () => {
-    const ajaxForms = document.querySelectorAll('form[action="https://formspree.io/f/YOUR_FORM_ID_HERE"]');
+    const ajaxForms = document.querySelectorAll('.google-sheet-form');
 
     ajaxForms.forEach(form => {
         form.addEventListener('submit', e => {
