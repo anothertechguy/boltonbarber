@@ -3,6 +3,15 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimization: Single primary page title -->
+    <title><?php 
+        if ( is_front_page() || is_home() ) {
+            echo 'Bolton Barber Studio | Denver Barber in Wheat Ridge, CO';
+        } else {
+            wp_title( '|', true, 'right' );
+            bloginfo( 'name' );
+        }
+    ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -22,8 +31,8 @@
                     <span class="w-full h-[2.5px] bg-white transition-all rounded-full group-active:bg-background-dark"></span>
                     <span class="w-3/4 h-[2.5px] bg-white transition-all rounded-full self-start group-active:bg-background-dark"></span>
                 </button>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/bolton-logo.jpg" alt="Bolton Barber Studio" class="h-12 w-auto hidden md:block">
-                <h1 class="text-xl font-black uppercase tracking-tighter hidden md:block">Bolton <span class="text-primary">Barber</span> Studio</h1>
+                <img loading="lazy" decoding="async" src="<?php echo get_template_directory_uri(); ?>/assets/bolton-logo.jpg" alt="Bolton Barber Studio" class="h-12 w-auto hidden md:block">
+                <div class="text-xl font-black uppercase tracking-tighter hidden md:block">Bolton <span class="text-primary">Barber</span> Studio</div>
             </div>
             <nav class="hidden md:flex items-center gap-10">
                 <a class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#services">Services</a>
@@ -71,7 +80,10 @@
                 <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
                     <div class="max-w-2xl">
                         <span class="text-primary font-bold tracking-[0.3em] uppercase mb-4 block drop-shadow-md">Bolton Barber Studio</span>
-                        <h2 class="text-6xl md:text-7xl font-black leading-tight mb-6 drop-shadow-xl">
+                        <h1 class="text-6xl md:text-7xl font-black leading-tight mb-6 drop-shadow-xl text-transparent select-none" style="font-size: 0px;">
+                            Bolton Barber Studio – Denver Barber in Wheat Ridge
+                        </h1>
+                        <h2 class="text-6xl md:text-7xl font-black leading-tight mb-6 drop-shadow-xl mt-0">
                             <?php echo esc_html($hero_headline); ?> <br/>
                             <span class="gold-gradient-text drop-shadow-md"><?php echo esc_html($hero_subheadline); ?></span>
                         </h2>
@@ -180,8 +192,12 @@
         $img = get_field('legacy_image');
 
         if ( empty($legacy_content) ) {
-            $legacy_content = '<p>At Bolton Barber Studio, we believe that barbering is more than just a haircut—it’s a <strong class="text-white">Legacy</strong>. Founded on the principles of <strong class="text-white">Old School Discipline</strong>, Chris Bolton has dedicated his career to the pursuit of <strong class="text-white">Precision</strong>.</p>
-            <p>Every client who sits in our chair receives a master-level experience built on <strong class="text-white">Consistency</strong> and <strong class="text-white">Professionalism</strong>. We blend time-honored techniques with modern artistic flair to ensure you leave looking and feeling your absolute best.</p>';
+            $legacy_content = '<p>I’m the owner of Bolton Barber Studio, and barbering is more than a career to me. It’s legacy.</p>
+            <p>After losing my father, a lifelong cosmetologist, I started thinking seriously about purpose. At his funeral, people kept saying how much he loved what he did. That stuck with me. Through prayer, reflection, and a series of undeniable signs, I felt called into barbering. A way to honor what and who he was, in my own way.</p>
+            <p>I’m originally from Knoxville, TN, and over the past six years I’ve traveled the country cutting hair, refining my craft, and learning from different front runners of the industry. Consistency, precision, professionalism, and genuine connection are the foundation of my work. My clients know they can rely on me — not just for a sharp, detailed haircut, but for punctuality, problem-solving, and real conversation.</p>
+            <p>I’ve been in recovery for over seven years, and that discipline shapes how I approach life and business. Work ethic matters. Showing up matters. Being someone people can depend on matters.</p>
+            <p>Whether you’re a young professional, in a client-facing role, or simply someone who cares about how you present yourself, my goal is to deliver consistent, high-level work and build long-term relationships. I love pouring into the communities I live and work in, and I believe a great barbershop should elevate more than just your haircut. It should elevate your experience, It should deepen connections, and it should add to the culture. When you sit in my chair you’ll see and feel the difference immediately.</p>
+            <p class="font-bold text-primary italic mt-8">⁃ Chris Bolton <br>Master Barber</p>';
         }
         $img = $img ?: get_template_directory_uri() . '/assets/bio pic.jpeg';
         ?>
@@ -199,7 +215,7 @@
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/5 rounded-full blur-[100px] z-0 pointer-events-none"></div>
                         
                         <div class="w-full h-[60vh] lg:h-auto rounded-[2rem] overflow-hidden shadow-2xl relative z-10 border border-white/10 flex-1">
-                            <img src="<?php echo esc_url($img); ?>" alt="Master Barber" class="w-full h-full object-cover object-top">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url($img); ?>" alt="Master Barber" class="w-full h-full object-cover object-top">
                         </div>
                     </div>
                     <div class="w-full lg:w-1/2">
@@ -255,7 +271,7 @@
                     </style>
                 <?php for($i = 1; $i <= 11; $i++): ?>
                     <div class="snap-center shrink-0 w-[75vw] md:w-[350px] aspect-[4/5] rounded-3xl overflow-hidden relative group border border-white/10">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/gallery/Gallery_<?php echo $i; ?>.jpg" alt="Gallery Image <?php echo $i; ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <img loading="lazy" decoding="async" src="<?php echo get_template_directory_uri(); ?>/assets/gallery/Gallery_<?php echo $i; ?>.jpg" alt="Gallery Image <?php echo $i; ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                 <?php endfor; ?>
                 <!-- Padding element to ensure the last image scrolls nicely to center on mobile -->
@@ -507,7 +523,7 @@
         <?php else : ?>
             <section class="py-24 max-w-7xl mx-auto px-6">
                 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-                    <h1 class="text-5xl font-black mb-8"><?php the_title(); ?></h1>
+                    <h2 class="text-5xl font-black mb-8"><?php the_title(); ?></h2>
                     <div class="prose prose-invert max-w-none">
                         <?php the_content(); ?>
                     </div>
@@ -586,7 +602,7 @@
             </svg>
         </button>
         <div class="mb-12">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/bolton-logo.jpg" alt="Bolton Barber Studio" class="h-20 w-auto mx-auto rounded-lg shadow-xl shadow-black">
+            <img loading="lazy" decoding="async" src="<?php echo get_template_directory_uri(); ?>/assets/bolton-logo.jpg" alt="Bolton Barber Studio" class="h-20 w-auto mx-auto rounded-lg shadow-xl shadow-black">
         </div>
         <nav class="flex flex-col items-center gap-8 w-full px-6">
             <a class="text-3xl font-black uppercase tracking-widest active:text-primary hover:text-primary transition-colors mobile-link w-full text-center py-2 border-b border-white/5" href="#services">Services</a>
@@ -627,5 +643,6 @@
             }
         });
     </script>
+    <script src="<?php echo get_template_directory_uri(); ?>/submit.js"></script>
 </body>
 </html>
