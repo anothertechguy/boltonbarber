@@ -26,11 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = 'Sending...';
             submitBtn.disabled = true;
 
+            // Serialize form data
+            const data = new URLSearchParams(new FormData(form)).toString();
+
             // Send via fetch API to the Web App URL
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: new FormData(form)
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: data
             })
                 .then(response => {
                     // Success UI State
