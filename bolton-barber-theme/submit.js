@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Send via fetch API to the Web App URL
             fetch(scriptURL, {
                 method: 'POST',
+                mode: 'no-cors',
                 body: new FormData(form)
             })
                 .then(response => {
