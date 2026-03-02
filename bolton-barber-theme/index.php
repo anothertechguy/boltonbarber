@@ -35,8 +35,10 @@
                     <span class="w-full h-[2.5px] bg-white transition-all rounded-full group-active:bg-background-dark"></span>
                     <span class="w-3/4 h-[2.5px] bg-white transition-all rounded-full self-start group-active:bg-background-dark"></span>
                 </button>
-                <img loading="lazy" decoding="async" src="<?php echo get_template_directory_uri(); ?>/assets/bolton-logo.jpg" alt="Bolton Barber Studio" class="h-12 w-auto hidden md:block">
-                <div class="text-xl font-black uppercase tracking-tighter hidden md:block">Bolton <span class="text-primary">Barber</span> Studio</div>
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="flex items-center gap-3 group cursor-pointer">
+                    <img loading="lazy" decoding="async" src="<?php echo get_template_directory_uri(); ?>/assets/bolton-logo.jpg" alt="Bolton Barber Studio" class="h-12 w-auto hidden md:block">
+                    <div class="text-xl font-black uppercase tracking-tighter hidden md:block group-hover:text-primary transition-colors">Bolton <span class="text-primary">Barber</span> Studio</div>
+                </a>
             </div>
             <nav class="hidden md:flex items-center gap-10">
                 <a class="text-sm font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#services">Services</a>
@@ -58,7 +60,7 @@
             $hero_headline = get_field('hero_headline') ?: 'Elite Fades';
             $hero_subheadline = get_field('hero_subheadline') ?: 'Modern Vibes';
             $hero_desc = get_field('hero_description') ?: 'Master Barber Chris Bolton serving up sharp fades and modern vibes. Real chill, real precision, sharp results.';
-            $hero_bg = get_field('hero_bg') ?: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCc8jvPRgJIHKbN5IWvB2JWVLg3rjinZbMqlZrzRzjuShcEpkUDn_CXQ_-2UJcVWOYlXICu9iBbPSAbt_EDL1Yliy_eQsijOJ_g4vXXCnMOTIMImTjz-Fin3EJ7za8fbHYNhPnMlofD2z_27NCCJckD--yMFzLvhvG_a1j9itXKbzhmJ6iFgqSPtLsJkVcjqokWqYBZuofjB6W1jxes3ySxdm2itf0FECEES90s25CuD50nY37Llsw-1-YniY7CtCZ4OCkNn4PTQB9c';
+            $hero_bg = get_field('hero_bg') ?: get_template_directory_uri() . '/assets/hero background.jpeg';
             ?>
             <section class="relative h-[90vh] flex items-center overflow-hidden">
                 <div class="absolute inset-0 z-0">
