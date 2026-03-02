@@ -1,10 +1,11 @@
-// Set this string to the URL of your Google Apps Script Web App
-// Make sure this is exactly what Google provides (e.g., https://script.google.com/macros/s/.../exec)
-const scriptURL = "https://script.google.com/macros/s/AKfycbwhbRkNddJVdiLzKyKj05cCgXi91CHTchldOQTyrn8_e6U5NCjlSV5_MjKxJn0wqDNq/exec";
+// Replace this with your Web3Forms Access Key
+// You can get one for free at https://web3forms.com/
+// When you hand this off to your client, just have them generate a key with their email and paste it here!
+const web3formsAccessKey = "YOUR_ACCESS_KEY_HERE";
 
 /**
- * Handle form submissions via AJAX
- * Find all forms with data-ajax-form attribute and set up listener
+ * Handle form submissions via AJAX for all elements with class 'google-sheet-form'
+ * (Kept the class name 'google-sheet-form' so we didn't have to change the HTML)
  */
 document.addEventListener('DOMContentLoaded', () => {
     const ajaxForms = document.querySelectorAll('.google-sheet-form');
@@ -13,9 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', e => {
             e.preventDefault();
 
-            // Only proceed if URL is set
-            if (scriptURL === "REPLACE_WITH_YOUR_WEB_APP_URL") {
-                alert("Developer Notice: Please set the scriptURL in submit.js first.");
+            if (web3formsAccessKey === "YOUR_ACCESS_KEY_HERE") {
+                alert("Developer Notice: Please set the Web3Forms Access Key in submit.js first.");
                 return;
             }
 
@@ -26,47 +26,58 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = 'Sending...';
             submitBtn.disabled = true;
 
-            // Serialize form data
-            const data = new URLSearchParams(new FormData(form)).toString();
+            // Gather form data
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
 
-            // Send via fetch API to the Web App URL
-            fetch(scriptURL, {
+            // Web3Forms requires the access key in the payload
+            object.access_key = web3formsAccessKey;
+
+            // Optional: You can set a custom subject line for the emails
+            object.subject = "New Submission from Bolton Barber Studio";
+
+            const json = JSON.stringify(object);
+
+            // Send via fetch API to Web3Forms
+            fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
-                body: data
+                body: json
             })
-                .then(response => {
-                    // Success UI State
-                    submitBtn.innerHTML = 'Success!';
+                .then(async (response) => {
+                    let jsonResponse = await response.json();
+
+                    if (response.status == 200) {
+                        // Success UI State
+                        submitBtn.innerHTML = 'Success!';
+                        submitBtn.classList.remove('bg-primary', 'hover:bg-primary/90');
+                        submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        form.reset();
+                    } else {
+                        // API Error State
+                        console.log(response);
+                        submitBtn.innerHTML = jsonResponse.message || 'Error - try again';
+                        submitBtn.classList.remove('bg-primary', 'hover:bg-primary/90');
+                        submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    // Network Error UI State
+                    submitBtn.innerHTML = 'Error - try again';
                     submitBtn.classList.remove('bg-primary', 'hover:bg-primary/90');
-                    submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-
-                    // Reset form
-                    form.reset();
-
+                    submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                })
+                .finally(() => {
                     // Revert button text after 3 seconds
                     setTimeout(() => {
                         submitBtn.innerHTML = originalBtnText;
                         submitBtn.disabled = false;
                         submitBtn.classList.add('bg-primary', 'hover:bg-primary/90');
                         submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
-                    }, 3000);
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-
-                    // Error UI State
-                    submitBtn.innerHTML = 'Error - try again';
-                    submitBtn.classList.remove('bg-primary', 'hover:bg-primary/90');
-                    submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
-
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalBtnText;
-                        submitBtn.disabled = false;
-                        submitBtn.classList.add('bg-primary', 'hover:bg-primary/90');
                         submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
                     }, 3000);
                 });
