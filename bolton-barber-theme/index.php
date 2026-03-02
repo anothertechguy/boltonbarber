@@ -17,6 +17,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <?php wp_head(); ?>
+    <script>
+        // Inject Web3Forms Access Key from ACF options
+        window.WEB3FORMS_ACCESS_KEY = '<?php echo esc_js(get_field('web3forms_access_key', 'options') ?: '7f11b2f4-2253-439e-aba0-474729ce130f'); ?>';
+    </script>
 </head>
 <body <?php body_class('bg-background-dark text-slate-100 font-display'); ?>>
     <?php wp_body_open(); ?>
@@ -490,7 +494,7 @@
                                 <h3 class="text-white font-black text-2xl uppercase tracking-tight mb-2">Sign Up For Special Offers</h3>
                                 <p class="text-slate-400 text-sm">Join our list to receive exclusive updates and VIP booking access.</p>
                             </div>
-                                <form action="" class="google-sheet-form" method="POST" class="space-y-6">
+                                <form action="" class="google-sheet-form space-y-6" method="POST">
                                     <div class="space-y-2">
                                         <label class="text-[11px] font-black uppercase tracking-widest text-slate-400 block">Full Name</label>
                                         <input name="name" required class="w-full bg-[#1e1e1e] border-transparent rounded-xl px-5 py-3.5 text-white focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm outline-none placeholder:text-slate-600" placeholder="Enter your name" type="text" />
@@ -565,7 +569,7 @@
 
                 <div class="space-y-6">
                     <h4 class="text-white font-black uppercase tracking-widest text-[11px]">Sign up for texts</h4>
-                        <form action="" class="google-sheet-form" method="POST" class="space-y-4 text-left">
+                        <form action="" class="google-sheet-form space-y-4 text-left" method="POST">
                             <div class="flex gap-3">
                                 <input name="phone" required class="bg-[#1a1a1a] border border-white/5 rounded-xl px-5 py-3 text-sm flex-1 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-slate-600" placeholder="Phone Number" type="tel" />
                             <button class="bg-primary text-white px-6 py-3 rounded-xl font-bold uppercase tracking-wider hover:bg-primary/90 transition-colors text-sm" type="submit">

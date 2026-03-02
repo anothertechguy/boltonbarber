@@ -117,6 +117,14 @@ add_action('acf/init', function() {
                 'name' => 'sms_optin_text',
                 'type' => 'textarea',
                 'default_value' => 'I agree to receive automated promotional and personalized marketing text messages from Bolton Barber Studio...',
+            ],
+            [
+                'key' => 'field_web3forms_key',
+                'label' => 'Web3Forms Access Key',
+                'name' => 'web3forms_access_key',
+                'type' => 'text',
+                'instructions' => 'Paste your Access Key from Web3Forms.com so form submissions are sent to your email.',
+                'default_value' => '7f11b2f4-2253-439e-aba0-474729ce130f',
             ]
         ],
         'location' => [
