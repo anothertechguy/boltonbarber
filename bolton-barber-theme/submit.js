@@ -1,7 +1,7 @@
 // Replace this with your Web3Forms Access Key
 // You can get one for free at https://web3forms.com/
 // When you hand this off to your client, just have them generate a key with their email and paste it here!
-const web3formsAccessKey = "YOUR_ACCESS_KEY_HERE";
+const web3formsAccessKey = "7f11b2f4-2253-439e-aba0-474729ce130f";
 
 /**
  * Handle form submissions via AJAX for all elements with class 'google-sheet-form'
