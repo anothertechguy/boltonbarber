@@ -99,13 +99,7 @@ add_action('acf/init', function() {
                 'type' => 'email',
                 'default_value' => 'Boltonbarbering@gmail.com',
             ],
-            [
-                'key' => 'field_sms_optin_text',
-                'label' => 'SMS Opt-in Text',
-                'name' => 'sms_optin_text',
-                'type' => 'textarea',
-                'default_value' => 'By checking this box, you consent to receive marketing and promotional text messages from Bolton Barber Studio at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to cancel or HELP for help. View our <a href="/privacy-policy" class="underline">Privacy Policy</a> and <a href="/terms-of-service" class="underline">Terms of Service</a>.',
-            ],
+
             [
                 'key' => 'field_web3forms_key',
                 'label' => 'Web3Forms Access Key',
