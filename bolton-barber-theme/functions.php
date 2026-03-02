@@ -104,7 +104,7 @@ add_action('acf/init', function() {
                 'label' => 'SMS Opt-in Text',
                 'name' => 'sms_optin_text',
                 'type' => 'textarea',
-                'default_value' => 'I agree to receive automated promotional and personalized marketing text messages from Bolton Barber Studio...',
+                'default_value' => 'By checking this box, you consent to receive marketing and promotional text messages from Bolton Barber Studio at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to cancel or HELP for help. View our <a href="/privacy-policy" class="underline">Privacy Policy</a> and <a href="/terms-of-service" class="underline">Terms of Service</a>.',
             ],
             [
                 'key' => 'field_web3forms_key',
@@ -112,7 +112,7 @@ add_action('acf/init', function() {
                 'name' => 'web3forms_access_key',
                 'type' => 'text',
                 'instructions' => 'Paste your Access Key from Web3Forms.com so form submissions are sent to your email.',
-                'default_value' => '7f11b2f4-2253-439e-aba0-474729ce130f',
+                'default_value' => '92e29152-32e5-4c8d-9872-303d5029e2af',
             ]
         ],
         'location' => [

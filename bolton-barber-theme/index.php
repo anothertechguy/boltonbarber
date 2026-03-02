@@ -515,7 +515,7 @@
                                 <div class="flex items-start gap-4 pt-2">
                                     <input class="mt-1 w-4 h-4 rounded border-slate-700 bg-[#1e1e1e] text-primary focus:ring-primary checked:bg-primary accent-primary cursor-pointer shrink-0" type="checkbox" id="sms-optin" />
                                     <label class="text-[11px] text-slate-500 leading-snug cursor-pointer" for="sms-optin">
-                                        <?php echo esc_html($sms_text ?: 'I agree to receive automated promotional and personalized marketing text messages from Bolton Barber Studio at the cell number used when signing up. Consent is not a condition of any purchase.'); ?>
+                                        <?php echo wp_kses_post(get_field('sms_optin_text', get_option('page_on_front')) ?: 'By checking this box, you consent to receive marketing and promotional text messages from Bolton Barber Studio at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to cancel or HELP for help. View our <a href="/privacy-policy" class="underline hover:text-white">Privacy Policy</a> and <a href="/terms-of-service" class="underline hover:text-white">Terms of Service</a>.'); ?>
                                     </label>
                                 </div>
                                 <button class="w-full bg-primary text-white py-4 rounded-xl font-black uppercase tracking-widest hover:bg-primary/90 transition-colors mt-4" type="submit">
@@ -580,9 +580,9 @@
                             </button>
                         </div>
                         <div class="flex items-start gap-4">
-                            <input class="mt-1 w-4 h-4 rounded border-slate-700 bg-[#1e1e1e] text-primary focus:ring-primary checked:bg-primary accent-primary cursor-pointer shrink-0" type="checkbox" required id="footer-sms-optin" />
+                            <input class="mt-1 w-4 h-4 rounded border-slate-700 bg-[#1e1e1e] text-primary focus:ring-primary checked:bg-primary accent-primary cursor-pointer shrink-0" type="checkbox" id="footer-sms-optin" />
                             <label class="text-[11px] text-slate-500 leading-snug cursor-pointer" for="footer-sms-optin">
-                                I agree to receive automated promotional and personalized marketing text messages. Consent is not a condition of purchase.
+                                By checking this box, you consent to receive marketing and promotional text messages from Bolton Barber Studio. Consent is not a condition of purchase. Msg & data rates may apply. Msg frequency varies. Reply STOP to cancel. View our <a href="<?php echo esc_url(home_url('/privacy-policy')); ?>" class="underline hover:text-white">Privacy Policy</a> & <a href="<?php echo esc_url(home_url('/terms-of-service')); ?>" class="underline hover:text-white">Terms of Service</a>.
                             </label>
                         </div>
                     </form>
@@ -590,10 +590,10 @@
             </div>
             
             <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                <p class="text-slate-500 text-[10px] uppercase tracking-widest font-bold">© 2026 Bolton Barber Studio. All Rights Reserved.</p>
+                <p class="text-slate-500 text-[10px] uppercase tracking-widest font-bold">© <?php echo date('Y'); ?> Bolton Barber Studio. All Rights Reserved.</p>
                 <div class="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                    <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+                    <a href="<?php echo esc_url(home_url('/privacy-policy')); ?>" class="hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="<?php echo esc_url(home_url('/terms-of-service')); ?>" class="hover:text-primary transition-colors">Terms of Service</a>
                 </div>
             </div>
         </div>
