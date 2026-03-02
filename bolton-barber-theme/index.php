@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <?php wp_head(); ?>
     <script>
-        // Inject Web3Forms Access Key from ACF options
-        window.WEB3FORMS_ACCESS_KEY = '<?php echo esc_js(get_field('web3forms_access_key', 'options') ?: '7f11b2f4-2253-439e-aba0-474729ce130f'); ?>';
+        // Inject Web3Forms Access Key from ACF front page fields
+        window.WEB3FORMS_ACCESS_KEY = '<?php echo esc_js(get_field('web3forms_access_key', get_option('page_on_front')) ?: '7f11b2f4-2253-439e-aba0-474729ce130f'); ?>';
     </script>
 </head>
 <body <?php body_class('bg-background-dark text-slate-100 font-display'); ?>>
@@ -440,10 +440,11 @@
 
             <!-- Contact Section -->
             <?php 
-            $phone = get_field('studio_phone', 'options') ?: '303-901-1163';
-            $address = get_field('studio_address', 'options') ?: "10160 W 50th Ave Unit 3 Suite 104\nWheat Ridge, CO 80033";
-            $email = get_field('studio_email', 'options') ?: 'Boltonbarbering@gmail.com';
-            $sms_text = get_field('sms_optin_text', 'options');
+            $front_page_id = get_option('page_on_front');
+            $phone = get_field('studio_phone', $front_page_id) ?: '303-901-1163';
+            $address = get_field('studio_address', $front_page_id) ?: "10160 W 50th Ave Unit 3 Suite 104\nWheat Ridge, CO 80033";
+            $email = get_field('studio_email', $front_page_id) ?: 'Boltonbarbering@gmail.com';
+            $sms_text = get_field('sms_optin_text', $front_page_id);
             ?>
             <section class="py-24 bg-[#111111]" id="contact">
                 <div class="max-w-7xl mx-auto px-6">
@@ -552,15 +553,15 @@
                 <div class="space-y-6">
                     <h4 class="text-white font-black uppercase tracking-widest text-[11px]">Connect</h4>
                     <div class="flex gap-3">
-                        <a href="<?php echo get_field('instagram_url', 'options') ?: 'https://instagram.com/boltactioncuts'; ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center hover:bg-primary transition-colors text-slate-400 hover:text-white border border-white/5">
+                        <a href="<?php echo get_field('instagram_url', get_option('page_on_front')) ?: 'https://instagram.com/boltactioncuts'; ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center hover:bg-primary transition-colors text-slate-400 hover:text-white border border-white/5">
                             <span class="sr-only">Instagram</span>
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.476 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg>
                         </a>
-                        <a href="<?php echo get_field('tiktok_url', 'options') ?: 'https://tiktok.com/@boltactioncuts'; ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center hover:bg-primary transition-colors text-slate-400 hover:text-white border border-white/5">
+                        <a href="<?php echo get_field('tiktok_url', get_option('page_on_front')) ?: 'https://tiktok.com/@boltactioncuts'; ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center hover:bg-primary transition-colors text-slate-400 hover:text-white border border-white/5">
                             <span class="sr-only">TikTok</span>
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
                         </a>
-                        <a href="<?php echo get_field('facebook_url', 'options') ?: 'https://facebook.com/Boltonbarberstudio'; ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center hover:bg-primary transition-colors text-slate-400 hover:text-white border border-white/5">
+                        <a href="<?php echo get_field('facebook_url', get_option('page_on_front')) ?: 'https://facebook.com/Boltonbarberstudio'; ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center hover:bg-primary transition-colors text-slate-400 hover:text-white border border-white/5">
                             <span class="sr-only">Facebook</span>
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
                         </a>

@@ -73,18 +73,6 @@ BoltonViteBridge::get_instance();
  * Register ACF Fields and Theme Settings
  */
 add_action('acf/init', function() {
-    // Add Options Page
-    if( function_exists('acf_add_options_page') ) {
-        acf_add_options_page([
-            'page_title'    => 'Studio Settings',
-            'menu_title'    => 'Studio Settings',
-            'menu_slug'     => 'studio-settings',
-            'capability'    => 'edit_posts',
-            'redirect'      => false,
-            'icon_url'      => 'dashicons-scissors',
-        ]);
-    }
-
     // Global Settings Field Group
     acf_add_local_field_group([
         'key' => 'group_studio_settings',
@@ -128,7 +116,7 @@ add_action('acf/init', function() {
             ]
         ],
         'location' => [
-            [['param' => 'options_page', 'operator' => '==', 'value' => 'studio-settings']],
+            [['param' => 'page_type', 'operator' => '==', 'value' => 'front_page']],
         ],
     ]);
 
@@ -273,8 +261,9 @@ add_action('acf/init', function() {
  * SEO & Local Schema (JSON-LD)
  */
 add_action('wp_head', function() {
-    $phone = get_field('studio_phone', 'options') ?: '303-901-1163';
-    $address = get_field('studio_address', 'options') ?: "10160 w50th ave Unit 3 suite 104\nWheat Ridge, CO 80033";
+    $front_page_id = get_option('page_on_front');
+    $phone = get_field('studio_phone', $front_page_id) ?: '303-901-1163';
+    $address = get_field('studio_address', $front_page_id) ?: "10160 w50th ave Unit 3 suite 104\nWheat Ridge, CO 80033";
     
     $schema = [
         "@context" => "https://schema.org",
