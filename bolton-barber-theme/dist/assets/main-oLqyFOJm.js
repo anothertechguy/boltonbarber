@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{console.log("Bolton Barber Theme Initialized"),document.querySelectorAll('a[href^="#"]').forEach(o=>{o.addEventListener("click",function(n){n.preventDefault();const e=this.getAttribute("href");if(e){const t=document.querySelector(e);t&&t.scrollIntoView({behavior:"smooth"})}})})});
